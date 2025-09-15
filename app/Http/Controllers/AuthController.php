@@ -81,7 +81,7 @@ class AuthController extends Controller
                 'email' => $user->email,
                 'role' => $user->role,
                 'token' => $tokenOnly,
-                'super_token' => env('SUPER_TOKEN'),
+                'super_token' => config('app.super_token'),
             ],
     ], 200);
    }

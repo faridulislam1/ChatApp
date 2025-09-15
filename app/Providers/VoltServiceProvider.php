@@ -15,11 +15,6 @@ class VoltServiceProvider extends ServiceProvider
         //
     }
 
-    /**
-     * Bootstrap services.
-     */
-
-    
     public function boot(): void
     {
         Volt::mount([

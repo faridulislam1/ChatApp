@@ -6,6 +6,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,6 +30,8 @@ Route::get('/', function () {
 
 });
 
+
+Route::get('/orders', [OrderController::class, 'index']);
 
 require __DIR__.'/auth.php';
 

@@ -38,8 +38,8 @@ Route::get('/activate-users', [UserController::class, 'activateUsers']);
 
     Route::post('/image', [ImageController::class, 'storeimage']);
 
-  Route::get('/cloud', function () {
-    return config('cloudinary.cloud_url');
-});
+    Route::get('/cloud', function () {
+        return config('cloudinary.cloud_url');
+    });
 
- 
+    

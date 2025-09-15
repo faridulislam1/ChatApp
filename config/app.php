@@ -53,7 +53,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
-
+    'super_token' => env('SUPER_TOKEN', 'fallback-token'),
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
