@@ -20,6 +20,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton('math', function () {
         return new \App\Services\MathService();
     });
+
+     $this->app->singleton('notification', function () {
+        return new \App\Services\NotificationService();
+    });
     }
 
     public function boot()

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
 use App\Facades\Math;
+use App\Http\Controllers\NotificationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,6 +36,9 @@ Route::get('/', function () {
 Route::get('/orders', [OrderController::class, 'index']);
 Route::get('/payment', [ChatController::class, 'makePayment']);
 Route::get('/math', [ChatController::class, 'calculate']);
+
+// Route::post('/notify', [NotificationController::class, 'notify']);
+
 
 
 require __DIR__.'/auth.php';

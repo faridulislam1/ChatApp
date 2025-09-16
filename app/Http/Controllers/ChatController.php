@@ -74,12 +74,25 @@ class ChatController extends Controller
     }
 
 
-    public function calculate()
+   public function calculate()
     {
         $sum = Math::add(10, 5);
+        $difference = Math::subtract(10, 5);
         $product = Math::multiply(10, 5);
+        $quotient = Math::divide(20, 4);
+        $avg = Math::average([10, 20, 30, 40, 50]);
+        $power = Math::power(2, 8);
+        $percentage = Math::percentage(200, 50);
 
-        return "Sum: $sum, Product: $product";
+        return response()->json([
+            'sum' => $sum,
+            'difference' => $difference,
+            'product' => $product,
+            'quotient' => $quotient,
+            'average' => $avg,
+            'power' => $power,
+            'percentage' => $percentage . '%'
+        ]);
     }
 
     }
