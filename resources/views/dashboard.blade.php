@@ -491,7 +491,6 @@
             modal.style.display = 'none';
         }
         
-        // Close modal if clicked outside
         window.addEventListener('click', function(e) {
             if (e.target === modal) {
                 closeModal();

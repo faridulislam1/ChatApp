@@ -9,10 +9,7 @@ use App\Models\ChatApp;
 
 class ChatAppSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-   
+  
      public function run(): void
     {
         $userIds = User::pluck('id')->toArray();
@@ -20,12 +17,9 @@ class ChatAppSeeder extends Seeder
         foreach (range(1, 2000) as $i) {
             $sender = $userIds[array_rand($userIds)];
             $receiver = $userIds[array_rand($userIds)];
-
-            // Avoid sender and receiver being the same
             while ($receiver === $sender) {
                 $receiver = $userIds[array_rand($userIds)];
             }
-
             ChatApp::create([
                 'sender_id' => $sender,
                 'receiver_id' => $receiver,

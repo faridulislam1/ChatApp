@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
+use App\Facades\Math;
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,6 +34,7 @@ Route::get('/', function () {
 
 Route::get('/orders', [OrderController::class, 'index']);
 Route::get('/payment', [ChatController::class, 'makePayment']);
+Route::get('/math', [ChatController::class, 'calculate']);
 
 
 require __DIR__.'/auth.php';

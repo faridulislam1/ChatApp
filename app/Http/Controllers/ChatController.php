@@ -9,24 +9,11 @@ use Illuminate\Support\Facades\DB;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use App\Models\Images;
-
+use App\Facades\Math;
 use App\Services\PaymentService;
 
 class ChatController extends Controller
     {
-//         public function chat(){
-       
-//         return view('components.settings.chat');
-//     } 
-//   public function index()
-//     {
-//         $users = User::all();
-//         // Show in debug terminal/log file
-//         Log::info('Loaded users:', ['users' => $users->toArray()]);
-//         return view('components.settings.chat', compact('users'));
-//     }
-
-
 
     public function ask(Request $request)
     {
@@ -45,7 +32,7 @@ class ChatController extends Controller
         $count = DB::table('customers')->count();
         return "Total customers: $count";
     }
-
+    
     if (str_contains(strtolower($question), 'same customer')) {
         $duplicates = DB::table('customers')
             ->select('name', DB::raw('count(*) as  '))
@@ -80,11 +67,19 @@ class ChatController extends Controller
    }
 
 
-
   public function makePayment()
     {
         $payment = new PaymentService();
         return $payment->process();
+    }
+
+
+    public function calculate()
+    {
+        $sum = Math::add(10, 5);
+        $product = Math::multiply(10, 5);
+
+        return "Sum: $sum, Product: $product";
     }
 
     }
