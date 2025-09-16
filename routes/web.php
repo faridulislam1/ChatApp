@@ -32,6 +32,8 @@ Route::get('/', function () {
 
 
 Route::get('/orders', [OrderController::class, 'index']);
+Route::get('/payment', [ChatController::class, 'makePayment']);
+
 
 require __DIR__.'/auth.php';
 

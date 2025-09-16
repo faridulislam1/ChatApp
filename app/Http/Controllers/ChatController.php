@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\DB;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use App\Models\Images;
+
+use App\Services\PaymentService;
+
 class ChatController extends Controller
     {
 //         public function chat(){
@@ -25,13 +28,13 @@ class ChatController extends Controller
 
 
 
-public function ask(Request $request)
-{
-    $question = $request->input('question');
-    $response = $this->handleQuestion($question);
-    return response()->json(['answer' => $response]);
-}
-private function handleQuestion($question)
+    public function ask(Request $request)
+    {
+        $question = $request->input('question');
+        $response = $this->handleQuestion($question);
+        return response()->json(['answer' => $response]);
+    }
+   private function handleQuestion($question)
     {
     if (str_contains(strtolower($question), 'total order')) {
         $count = DB::table('orders')->count();
@@ -74,6 +77,14 @@ private function handleQuestion($question)
     }
 
     return "Sorry, I don't understand the question yet.";
-}
+   }
+
+
+
+  public function makePayment()
+    {
+        $payment = new PaymentService();
+        return $payment->process();
+    }
 
     }
