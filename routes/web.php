@@ -9,6 +9,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
 use App\Facades\Math;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\CryptoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,25 +33,23 @@ Route::get('/', function () {
 
 });
 
+    Route::get('/orders', [OrderController::class, 'index']);
+    Route::get('/payment', [ChatController::class, 'makePayment']);
+    Route::get('/math', [ChatController::class, 'calculate']);
 
-Route::get('/orders', [OrderController::class, 'index']);
-Route::get('/payment', [ChatController::class, 'makePayment']);
-Route::get('/math', [ChatController::class, 'calculate']);
+    // Route::post('/notify', [NotificationController::class, 'notify']);
 
-// Route::post('/notify', [NotificationController::class, 'notify']);
+    require __DIR__.'/auth.php';
 
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::post('/ask', [App\Http\Controllers\ChatController::class, 'ask'])->name('ask');
 
+    Route::get('/pay', [PaymentController::class, 'showForm']);
+    Route::post('/pay', [PaymentController::class, 'pay'])->name('pay');
+    Route::post('/success', [PaymentController::class, 'success'])->name('success');
+    Route::post('/fail', [PaymentController::class, 'fail'])->name('fail');
+    Route::post('/cancel', [PaymentController::class, 'cancel'])->name('cancel');
 
-require __DIR__.'/auth.php';
+    Route::get('/decrypt', [CryptoController::class, 'decryptData']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('/ask', [App\Http\Controllers\ChatController::class, 'ask'])->name('ask');
-
-
-
-Route::get('/pay', [PaymentController::class, 'showForm']);
-Route::post('/pay', [PaymentController::class, 'pay'])->name('pay');
-Route::post('/success', [PaymentController::class, 'success'])->name('success');
-Route::post('/fail', [PaymentController::class, 'fail'])->name('fail');
-Route::post('/cancel', [PaymentController::class, 'cancel'])->name('cancel');
 

@@ -10,7 +10,6 @@ class OrderController extends Controller
 
     public function __construct(OrderService $orderService)
     {
-        // Dependency injection via Service Container
         $this->orderService = $orderService;
     }
 

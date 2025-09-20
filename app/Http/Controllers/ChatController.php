@@ -73,7 +73,6 @@ class ChatController extends Controller
         return $payment->process();
     }
 
-
    public function calculate()
     {
         $sum = Math::add(10, 5);
