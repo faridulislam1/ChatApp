@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Yajra\DataTables\Facades\DataTables;
+use App\Models\User;
 class UserController extends Controller
 {
   public function activateUsers()
@@ -32,5 +33,29 @@ class UserController extends Controller
     ]);
 }
 
+
+
+ public function index()
+    {
+        return view('users.index');
+    }
+
+    public function getUsers(Request $request)
+    {
+                if ($request->ajax()) {
+                    $data = User::select('id', 'name', 'email', 'created_at');
+                  return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->editColumn('created_at', function($row){
+                        return $row->created_at->format('Y-m-d'); // Only date
+                    })
+                    ->addColumn('action', function($row){
+                        return '<a href="/users/'.$row->id.'" class="btn btn-sm btn-primary">View</a>';
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+
+        }
+    }
 
 }

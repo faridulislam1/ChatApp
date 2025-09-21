@@ -9,7 +9,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
 use App\Facades\Math;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\CryptoController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -50,6 +50,7 @@ Route::get('/', function () {
     Route::post('/fail', [PaymentController::class, 'fail'])->name('fail');
     Route::post('/cancel', [PaymentController::class, 'cancel'])->name('cancel');
 
-    Route::get('/decrypt', [CryptoController::class, 'decryptData']);
+    // Route::get('/decrypt', [CryptoController::class, 'decryptData']);
 
-
+    Route::get('users', [UserController::class, 'index']);
+    Route::get('users/data', [UserController::class, 'getUsers'])->name('users.data');
