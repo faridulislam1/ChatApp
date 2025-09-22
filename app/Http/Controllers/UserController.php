@@ -35,27 +35,30 @@ class UserController extends Controller
 
 
 
- public function index()
+    public function index()
     {
         return view('users.index');
     }
 
+
+
     public function getUsers(Request $request)
     {
-                if ($request->ajax()) {
-                    $data = User::select('id', 'name', 'email', 'created_at');
-                  return DataTables::of($data)
-                    ->addIndexColumn()
-                    ->editColumn('created_at', function($row){
-                        return $row->created_at->format('Y-m-d'); // Only date
-                    })
-                    ->addColumn('action', function($row){
-                        return '<a href="/users/'.$row->id.'" class="btn btn-sm btn-primary">View</a>';
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
+        if ($request->ajax()) {
+            $data = User::select('id', 'name', 'email', 'created_at');
+            return DataTables::of($data)
+            ->addIndexColumn()
+            ->editColumn('created_at', function($row){
+                return $row->created_at->format('Y-m-d'); 
+            })
+            ->addColumn('action', function($row){
+                return '<a href="/users/'.$row->id.'" class="btn btn-sm btn-primary">View</a>';
+                return '<a  href="/users/'.$row->id.'/edit" class="btn btn-sm btn-warning">Edit</a>';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
 
-        }
+    }
     }
 
 }
