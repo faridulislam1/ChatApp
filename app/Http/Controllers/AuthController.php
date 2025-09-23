@@ -202,7 +202,7 @@ class AuthController extends Controller
             ], 403);
         }
 
-        $orders = Order::query()
+        $orders = Order::query() 
             ->when($search, function ($query, $search) {
                 $query->where('CustomerName', 'like', "%{$search}%");
             })

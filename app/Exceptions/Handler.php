@@ -6,6 +6,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
@@ -22,6 +23,9 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
+    /**
+     * Register any exception handling callbacks for the application.
+     */
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
@@ -29,8 +33,12 @@ class Handler extends ExceptionHandler
         });
     }
 
+    /**
+     * Render an exception into an HTTP response.
+     */
     public function render($request, Throwable $exception)
     {
+        // Authentication exception
         if ($exception instanceof AuthenticationException) {
             return response()->json([
                 'success' => false,
@@ -38,19 +46,30 @@ class Handler extends ExceptionHandler
                 'message' => 'Authorization token not found'
             ], 401);
         }
+
+        // Route not found
         if ($exception instanceof NotFoundHttpException) {
             return response()->json([
                 'status' => 404,
-                'message' => 'Route not found. Please check   URL.'
+                'message' => 'Route not found. Please check URL.'
             ], 404);
         }
+
+        // Method not allowed
         if ($exception instanceof MethodNotAllowedHttpException) {
             return response()->json([
                 'status' => 405,
                 'message' => 'HTTP method not allowed for this route.'
             ], 405);
         }
-        return parent::render($request, $exception);
 
+        if ($exception instanceof ThrottleRequestsException) {
+            return response()->json([
+                'error' => $exception->getMessage() ?: 'Too many requests. Please try again later.'
+            ], 429);
+        }
+
+
+        return parent::render($request, $exception);
     }
 }

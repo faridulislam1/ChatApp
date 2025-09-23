@@ -8,6 +8,8 @@ use Yajra\DataTables\Facades\DataTables;
 use App\Models\User;
 class UserController extends Controller
 {
+
+    
   public function activateUsers()
 {
     $inactiveUsers = DB::table('users')
@@ -39,8 +41,6 @@ class UserController extends Controller
     {
         return view('users.index');
     }
-
-
 
     public function getUsers(Request $request)
     {

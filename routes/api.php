@@ -19,10 +19,14 @@ Route::get('/activate-users', [UserController::class, 'activateUsers']);
 
 
     Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/login', [AuthController::class, 'login']);
-    // Route::middleware(['auth:sanctum', 'admin'])->group(function () {
-    //      Route::get('/users', [AuthController::class, 'showuser']);
+    // Route::post('/login', [AuthController::class, 'login']);
+
+    // Route::middleware('throttle:5,1')->group(function () {
+    //     Route::post('/login', [AuthController::class, 'login']);
     // });
+
+    
+    Route::middleware('throttle:5,1')->post('/login', [AuthController::class, 'login']);
 
     Route::middleware([SuperTokenMiddleware::class])->group(function () {
         Route::get('/users', [AuthController::class, 'showuser']);
