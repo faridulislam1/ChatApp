@@ -25,14 +25,14 @@ class RouteServiceProvider extends ServiceProvider
         });
     }
 
-    protected function configureRateLimiting(): void
+   protected function configureRateLimiting(): void
     {
         RateLimiter::for('api', function ($request) {
             return Limit::perMinute(60)->by($request->ip());
         });
 
-       RateLimiter::for('login', function ($request) {
-            return Limit::perMinute(5)
+        RateLimiter::for('login', function ($request) {
+            return Limit::perMinute(2)
                 ->by($request->ip())
                 ->response(function () {
                     return response()->json([
@@ -40,8 +40,8 @@ class RouteServiceProvider extends ServiceProvider
                     ], 429);
                 });
         });
-
     }
+
 
 
 }

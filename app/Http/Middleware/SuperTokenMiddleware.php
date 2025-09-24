@@ -16,6 +16,7 @@ class SuperTokenMiddleware
         $request->attributes->set('super_access', true);
     } else {
         $request->attributes->set('super_access', false);
+        $request->attributes->set('error_message', 'Invalid or missing super token.');
     }
 
     return $next($request);

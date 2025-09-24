@@ -33,18 +33,15 @@ class DatabaseSeeder extends Seeder
         ]);
     }
 
-
     private function seedChatMessages(): void
     {
         $userIds = User::pluck('id')->toArray();
-
         foreach (range(1, 2000) as $i) {
             $sender = $userIds[array_rand($userIds)];
             $receiver = $userIds[array_rand($userIds)];
             while ($receiver === $sender) {
                 $receiver = $userIds[array_rand($userIds)];
             }
-
             ChatApp::create([
                 'sender_id' => $sender,
                 'receiver_id' => $receiver,

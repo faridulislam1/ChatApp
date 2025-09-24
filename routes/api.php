@@ -9,6 +9,7 @@ use App\Http\Middleware\SuperTokenMiddleware;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\NotificationController;
+use App\Providers\RouteServiceProvider;
 
     Route::get('/test', function () {
         return response()->json(['message' => 'API routes are working!']);

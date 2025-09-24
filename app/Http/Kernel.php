@@ -31,6 +31,7 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\SuperTokenMiddleware::class,
+            // 'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
         ],
     ];
